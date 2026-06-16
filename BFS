@@ -1,0 +1,38 @@
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': []
+}
+
+target = input("Enter the target variables in sequence: ")
+start_node = input("Enter start node: ")
+
+target2 = list(target)
+print(target2)
+
+def bfs(graph, node, target):
+    visited = []
+    queue = []
+
+    queue.append(node)
+    visited.append(node)
+
+    while queue:
+        s = queue.pop(0)
+        print(s, end=" ")
+
+        if s == target:
+            break
+
+        for neighbour in graph[s]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+
+for target3 in target2:
+    bfs(graph, start_node, target3)
+    print()
