@@ -1,0 +1,8 @@
+def tower_of_hanoi(nums,source,aux,target):
+    if(nums==1):
+        print(f"Move 1 from {source} to {target}")
+        return
+    tower_of_hanoi(nums-1,source,target,aux)
+    print(f"Move {nums} from {source} to {target}")
+    tower_of_hanoi(nums-1,aux,source,target)
+tower_of_hanoi(3,"A","B","C")
