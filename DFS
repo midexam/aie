@@ -1,0 +1,37 @@
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': []
+}
+
+target = input("Enter the target variables in sequence: ")
+start_node = input("Enter start node: ")
+
+target2 = list(target)
+print(target2)
+
+def dfs(graph, node, target):
+    visited = set()
+    stack = [node]
+
+    while stack:
+        s = stack.pop()
+        print(s, end=" ")
+
+        if s == target:
+            break
+
+        if s not in visited:
+            visited.add(s)
+
+            for neighbour in reversed(graph[s]):
+                if neighbour not in visited:
+                    stack.append(neighbour)
+
+for target3 in target2:
+    dfs(graph, start_node, target3)
+    print()
