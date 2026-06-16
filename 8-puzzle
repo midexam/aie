@@ -1,0 +1,55 @@
+from collections import deque
+
+def solve(start, goal):
+    q = deque([(start, [])])
+    visited = set()
+
+    while q:
+        state, path = q.popleft()
+
+        if state == goal:
+            return path + [state]
+
+        if state in visited:
+            continue
+
+        visited.add(state)
+
+        i = state.index(0)  # Position of blank tile
+
+        moves = []
+
+        if i > 2:
+            moves.append(i - 3)  # Up
+
+        if i < 6:
+            moves.append(i + 3)  # Down
+
+        if i % 3 > 0:
+            moves.append(i - 1)  # Left
+
+        if i % 3 < 2:
+            moves.append(i + 1)  # Right
+
+        for m in moves:
+            new = list(state)
+
+            new[i], new[m] = new[m], new[i]
+
+            q.append((tuple(new), path + [state]))
+
+
+start = (1, 2, 3,
+         4, 0, 5,
+         6, 7, 8)
+
+goal = (1, 2, 3,
+        4, 5, 0,
+        6, 7, 8)
+
+solution = solve(start, goal)
+
+for step in solution:
+    for i in range(0, 9, 3):
+        print(step[i:i+3])
+    print()
