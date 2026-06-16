@@ -16,43 +16,27 @@ def monkey_banana():
     )
 
     actions = {
-        'Move-to-Chair':
-            lambda state: (
-                'Near-Chair',
-                state[1],
-                state[2],
-                state[3]
-            ) if state[0] != 'Near-Chair' else None,
+        'Move-to-Chair': lambda state:
+            ('Near-Chair', state[1], state[2], state[3])
+            if state[0] != 'Near-Chair' else None,
 
-        'Push-Chair-Under-Banana':
-            lambda state: (
-                'Near-Chair',
-                'Chair-Under-Banana',
-                state[2],
-                state[3]
-            ) if state[0] == 'Near-Chair' and
-                 state[1] != 'Chair-Under-Banana' else None,
+        'Push-Chair-Under-Banana': lambda state:
+            ('Near-Chair', 'Chair-Under-Banana', state[2], state[3])
+            if state[0] == 'Near-Chair' and
+               state[1] != 'Chair-Under-Banana' else None,
 
-        'Climb-Chair':
-            lambda state: (
-                'Near-Chair',
-                'Chair-Under-Banana',
-                'On-Chair',
-                state[3]
-            ) if state[0] == 'Near-Chair' and
-                 state[1] == 'Chair-Under-Banana' and
-                 state[2] != 'On-Chair' else None,
+        'Climb-Chair': lambda state:
+            ('Near-Chair', 'Chair-Under-Banana', 'On-Chair', state[3])
+            if state[0] == 'Near-Chair' and
+               state[1] == 'Chair-Under-Banana' and
+               state[2] != 'On-Chair' else None,
 
-        'Grasp-Banana':
-            lambda state: (
-                'Near-Chair',
-                'Chair-Under-Banana',
-                'On-Chair',
-                'Holding'
-            ) if state[0] == 'Near-Chair' and
-                 state[1] == 'Chair-Under-Banana' and
-                 state[2] == 'On-Chair' and
-                 state[3] != 'Holding' else None,
+        'Grasp-Banana': lambda state:
+            ('Near-Chair', 'Chair-Under-Banana', 'On-Chair', 'Holding')
+            if state[0] == 'Near-Chair' and
+               state[1] == 'Chair-Under-Banana' and
+               state[2] == 'On-Chair' and
+               state[3] != 'Holding' else None,
     }
 
     dq = deque([(initial_state, [])])
